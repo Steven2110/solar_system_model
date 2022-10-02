@@ -29,12 +29,12 @@ def get_max_length_orbit_line(from_planet: str) -> int:
         case "Mars":
             return 675          # Return approx. Mars revolution duration in days, real = 686.67 days
         case "Jupiter":
-            return 4_325        # Return approx. Jupiter revolution duration in days, real = 4,331.87 days
+            return 4_300        # Return approx. Jupiter revolution duration in days, real = 4,331.87 days
         case "Saturn":
-            return 10_740       # Return approx. Saturn revolution duration in days, real = 10,752.9 days
+            return 10_600       # Return approx. Saturn revolution duration in days, real = 10,752.9 days
         case "Uranus":
-            return 30_665       # Return approx. Uranus revolution duration in days, real = 30,684.65 days
+            return 30_600       # Return approx. Uranus revolution duration in days, real = 30,684.65 days
         case "Neptune":
-            return 60_125       # Return approx. Neptune revolution duration in days, real = 60,148.35 days
+            return 60_000       # Return approx. Neptune revolution duration in days, real = 60,148.35 days
     
     return 355                  # By default return approx. Earth revolution duration in days 

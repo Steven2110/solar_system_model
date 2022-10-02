@@ -1,9 +1,5 @@
 import pygame
-from astroquery.jplhorizons import Horizons
-from astropy.time import Time
-import numpy as np
 import datetime
-# from datetime import datetime
 
 from constants import (
     BLACK,
@@ -12,22 +8,24 @@ from constants import (
     WIDTH, 
     HEIGHT,
 )
+from solar_system.celestial_constants import PLANETS
 from solar_system.solar_system import SolarSystem
 
 # Initialization for pygame
 pygame.init()
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 FONT = pygame.font.SysFont('arial', 30)
 DIST_FONT = pygame.font.SysFont('arial', 16)
 pygame.display.set_caption("SolarSystem")
 
 def main():
-    elapsed_time = datetime.datetime.strptime(SIMULATION_START, '%Y-%m-%d')
+    start_time = datetime.datetime.strptime(SIMULATION_START, '%Y-%m-%d')
+    current_time = datetime.datetime.strptime(SIMULATION_START, '%Y-%m-%d')
 
     run = True
     clock = pygame.time.Clock()     # To run this simulation at the same speed on every computer
 
-    solar_system = SolarSystem(number_of_planet=4).get_solar_system()
+    solar_system = SolarSystem(planets=PLANETS).get_solar_system()
 
     while run:
         clock.tick(120)
@@ -44,11 +42,16 @@ def main():
                 celestial_object.get_object_name(), 
                 celestial_object.get_distance_from_sun(),
             )
-            distance_text = DIST_FONT.render(text, 1, WHITE)
+            distance_text = DIST_FONT.render(text, 1, celestial_object.get_object_color())
             WIN.blit(distance_text, (0, 990 - pos * 40))
-        elapsed_time += datetime.timedelta(days=1)
-        time_text = FONT.render('Date: {}'.format(elapsed_time.strftime('%d-%m-%Y')), 1, WHITE)
-        WIN.blit(time_text, (0, 0))
+        current_time += datetime.timedelta(days=1)
+        elapsed_time = (current_time - start_time).days
+        start_time_text = FONT.render('Date start: {}'.format(start_time.strftime('%d-%m-%Y')), 1, WHITE)
+        current_time_text = FONT.render('Date current: {}'.format(current_time.strftime('%d-%m-%Y')), 1, WHITE)
+        elapsed_time_text = FONT.render('Run time: {} days'.format(elapsed_time), 1, WHITE)
+        WIN.blit(start_time_text, (0, 0))
+        WIN.blit(current_time_text, (0, 50))
+        WIN.blit(elapsed_time_text, (0, 100))
         pygame.display.update()
 
     pygame.quit()

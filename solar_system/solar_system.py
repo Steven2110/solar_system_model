@@ -1,14 +1,12 @@
 import numpy as np
-from astroquery.jplhorizons import Horizons
 
 from solar_system.celestial import Celestial
 from solar_system.celestial_constants import *
-from constants import AU, SCALE
 from solar_system.utils import get_color, get_mass, get_position, get_radius
 
 
 class SolarSystem:  
-    def __init__(self, number_of_planet: int) -> None:
+    def __init__(self, planets) -> None:
         '''
         To initialize our solar system, we need to pass `number_of_planet` that we want to simulate.
         
@@ -22,9 +20,8 @@ class SolarSystem:
         self.solar_system.append(self.sun_init())
 
         # Initialize planets according to the number of planet passed
-        for id, i in enumerate(range(number_of_planet), 1):
-            planet_name = PLANETS[i]
-            planet = self.planet_init(planet_name, id)
+        for planet_name in planets:
+            planet = self.planet_init(planet_name)
             self.solar_system.append(planet)
       
     def sun_init(self) -> Celestial:
@@ -39,7 +36,7 @@ class SolarSystem:
         )
         return sun
 
-    def planet_init(self, name, id) -> Celestial:
+    def planet_init(self, name) -> Celestial:
         # Get the initial velocity in y axis for each planet
         x_pos, y_pos = get_position(planet_name=name)
 

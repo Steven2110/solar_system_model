@@ -1,6 +1,8 @@
+from constants import REAL_SCALE
 # This file is used to store all constants value that related with planets
 
 # Name of all planets in solar system
+
 PLANETS = [
     'Mercury',
     'Venus',
@@ -19,20 +21,21 @@ VENUS_COLOR = (227, 158, 28)
 EARTH_COLOR = (79, 76, 176)
 MARS_COLOR = (193, 68, 14)
 JUPITER_COLOR = (216, 202, 157)
-SATRUN_COLOR = (234, 2214, 184)
+SATURN_COLOR = (234, 214, 184)
 URANUS_COLOR = (225, 238, 238)
 NEPTUNE_COLOR = (75, 112, 221)
 
-# Radius for all celestial objects (real radius in meter in comment)
-SUN_RADIUS = 50         # 695_340_000
-MERCURY_RADIUS = 6      # 2_440_000
-VENUS_RADIUS = 19       # 6_052_000
-EARTH_RADIUS = 20       # 6_371_000
-MARS_RADIUS = 10        # 3_390_000
-JUPITER_RADIUS = 220    # 69_991_000
-SATURN_RADIUS = 180     # 58_232_000
-URANUS_RADIUS = 80      # 25_362_000
-NEPTUNE_RADIUS = 79     # 24_662_000
+# Radius for all celestial objects, we use real radius if user give `REAL_SCALE` value of `True`,
+# else we use 50 value for sun and for other planet we use approx scaling from earth size.
+SUN_RADIUS = 695_340_000 if REAL_SCALE else 50
+MERCURY_RADIUS = 2_440_000 if REAL_SCALE else 6
+EARTH_RADIUS = 6_371_000 if REAL_SCALE else 20
+VENUS_RADIUS = 6_052_000 if REAL_SCALE else 19
+MARS_RADIUS = 3_390_000 if REAL_SCALE else 10
+JUPITER_RADIUS = 69_991_000 if REAL_SCALE else 220
+SATURN_RADIUS = 58_232_000 if REAL_SCALE else 180
+URANUS_RADIUS = 25_362_000 if REAL_SCALE else 80
+NEPTUNE_RADIUS = 24_662_000 if REAL_SCALE else 79
 
 # Masses for all celestial objects in Kilogram
 SUN_MASS = 1.98892e30

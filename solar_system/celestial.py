@@ -8,6 +8,7 @@ from constants import (
     SCALE,
     TIMESTEP,
     WIDTH,
+    REAL_SCALE
 )
 from solar_system.utils import get_max_length_orbit_line
 
@@ -21,7 +22,6 @@ class Celestial:
         radius: int,
         color: tuple, 
         mass: float, 
-        x_velocity: float = 0.0,
         y_velocity: float = 0.0, 
         is_sun: bool = False,
     ) -> None:
@@ -37,7 +37,7 @@ class Celestial:
         self.__x = x * AU
         self.__y = y * AU
 
-        self.__radius = radius
+        self.__radius = radius / AU if REAL_SCALE else radius
         self.__mass = mass
 
         self.__x_velocity = 0
@@ -72,6 +72,11 @@ class Celestial:
 
     def get_object_name(self) -> str:
         return self.__name
+
+    
+    def get_object_color(self) -> tuple:
+        return self.__color
+
 
     def gravitational_force(self, other_celestial_object):
         '''
