@@ -1,6 +1,9 @@
 # solar_system_model
 Simulation of Solar System in Pygame
 
+## Requirements
+[`Python 3.10`](https://www.python.org/downloads/release/python-3100/)
+
 ## Setup to run
 Install required library by entering
 
